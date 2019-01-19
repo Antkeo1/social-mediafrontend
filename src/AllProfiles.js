@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
+import ProfileForm from './auth/components/ProfileForm'
 
 const AllProfiles = (props) => {
   const profiles = props.profiles.map((profile) => {
