@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import AllProfiles from './AllProfiles'
+import Body from './Body'
 
 const Home = (props) => {
   return(

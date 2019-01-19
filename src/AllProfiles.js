@@ -1,29 +1,25 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 
-class AllProfiles extends Component {
-  constructor(props) {
-    super(props)
-    this.state = [{
-      profiles: {
-        name:'',
-        occupation:'',
-        gender:'',
-        race:'',
-        interest:'',
-        hobbies:''
+const AllProfiles = (props) => {
 
-      }
-    }]
-  }
-
-  render(){
+  profiles = this.state.profiles.map((profile) => {
     return(
-      <div>
-        <h1>To do: List of profiles</h1>
+      <div key={profile.id}>
+        <h1>{profile.name}</h1>
+        <p>{profile.occupation}</p>
+        <p>{profile.gender}</p>
+        <p>{profile.race}</p>
+        <p>{profile.interest}</p>
+        <p>{profile.hobbies}</p>
       </div>
     )
-  }
+  })
+  return(
+    <div>
+      {profiles}
+    </div>
+  )
 }
 
 export default AllProfiles
