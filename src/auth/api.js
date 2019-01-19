@@ -64,3 +64,22 @@ export const changePassword = (passwords, user) => {
     })
   })
 }
+export const profileForm = (profile, user) => {
+  return fetch(apiUrl + '/create-profile', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization':`Token token=${user.token}`
+    },
+    body: JSON.stringify({
+      profile: {
+        name:profile.name,
+        occupation:profile.occupation,
+        gender:profile.gender,
+        race:profile.race,
+        interest:profile.interest,
+        hobbies:profile.hobbies
+      }
+    })
+  })
+}

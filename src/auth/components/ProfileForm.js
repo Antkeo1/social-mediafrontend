@@ -2,18 +2,21 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import messages from '../messages'
 import apiUrl from '../../apiConfig'
+import { handleErrors, profileForm } from '../api'
 
 class ProfileForm extends Component {
   constructor () {
     super()
 
     this.state = {
-      name: '',
-      occupation: '',
-      gender: '',
-      race:'',
-      interest:'',
-      hobbies:''
+      profile: [{
+        name: '',
+        occupation: '',
+        gender: '',
+        race:'',
+        interest:'',
+        hobbies:''
+      }]
     }
   }
 
@@ -21,18 +24,16 @@ class ProfileForm extends Component {
     [event.target.name]: event.target.value
   })
 
-  signUp = event => {
+  profileForm = event => {
     event.preventDefault()
 
-    const { name, occupation, gender, race, interest, hobbies} = this.state
-    const { flash, history, setUser } = this.props
+    const { profile: {name, occupation, gender, race, interest, hobbies}} = this.state
+    const { flash, history, user } = this.props
 
-    profileForm(this.state)
+    profileForm(this.state, user)
       .then(handleErrors)
-      .then(() => signIn(this.state))
       .then(handleErrors)
       .then(res => res.json())
-      .then(res => setUser(res.user))
       .then(() => flash(messages.profileFormSuccess, 'flash-success'))
       .then(() => history.push('/'))
       .catch(() => flash(messages.profileFormFailure, 'flash-error'))
@@ -42,7 +43,7 @@ class ProfileForm extends Component {
     const { name, occupation, gender, race, interest, hobbies} = this.state
 
     return (
-      <form className='auth-form' onSubmit={this.signUp}>
+      <form className='auth-form' onSubmit={this.profileForm}>
         <h3>Create Profile</h3>
 
         <label htmlFor="name">Name</label>
