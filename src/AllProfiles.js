@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 
 const AllProfiles = (props) => {
-
-  profiles = this.state.profiles.map((profile) => {
+  const profiles = props.profiles.map((profile) => {
     return(
       <div key={profile.id}>
         <h1>{profile.name}</h1>

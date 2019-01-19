@@ -7,7 +7,7 @@ const Home = (props) => {
   return(
     <div className='text-center'>
       <h1>HomePage</h1>
-      <AllProfiles />
+      <Body />
     </div>
   )
 }

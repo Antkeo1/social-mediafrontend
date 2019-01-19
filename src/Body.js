@@ -10,7 +10,7 @@ class Body extends Component {
     }
   }
   componentDidMount(){
-    fetch('http://localhost:4741/show-all-profiles')
+    fetch('http://localhost:4741/')
       .then((response) => {return response.json()})
       .then((data) => {this.setState({ profiles: data }) })
   }
