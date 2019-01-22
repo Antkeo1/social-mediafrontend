@@ -57,9 +57,9 @@ class App extends Component {
             <ChangePassword flash={this.flash} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-profile' render={() => (
-            <ProfileForm flash={this.flash} user={user} />
+            <ProfileForm flash={this.flash} user={user} editable={true} profileCrud={'create'}/>
           )} />
-          <Home />
+          <Home user={user} />
         </main>
       </React.Fragment>
     )

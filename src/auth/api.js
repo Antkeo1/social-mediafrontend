@@ -65,7 +65,7 @@ export const changePassword = (passwords, user) => {
   })
 }
 
-export const profileForm = (profile, user) => {
+export const createProfile = (profile, user) => {
   return fetch(apiUrl + '/create-profile', {
     method: 'POST',
     headers: {

@@ -6,9 +6,13 @@ import {handleView} from './auth/api'
 
 const AllProfiles = (props) => {
   const profiles = props.profiles.map((profile) => {
+    let editable = false
+    if(profile.user === props.user) {
+      editable = true
+    }
     return(
       <div key={profile.id}>
-        <ProfileForm profile={profile} handleView={handleView}
+        <ProfileForm profile={profile} user={props.user} editable={editable} handleView={handleView}
           handleDelete={props.handleDelete} handleUpdate={props.handleUpdate}/>
       </div>
     )
@@ -16,6 +20,7 @@ const AllProfiles = (props) => {
   return(
     <div>
       {profiles}
+      
     </div>
   )
 }

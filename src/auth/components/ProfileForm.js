@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import messages from '../messages'
 import apiUrl from '../../apiConfig'
-import { handleErrors, profileForm } from '../api'
+import { handleErrors, createProfile, handleUpdate} from '../api'
 
 class ProfileForm extends Component {
-  constructor () {
-    super()
-
+  constructor (props) {
+    super(props)
     this.state = {
       profile: [{
         name: '',
@@ -18,19 +17,23 @@ class ProfileForm extends Component {
         hobbies:''
       }]
     }
+    // if (this.props.profileCrud === 'create') {
+    //   this.state.profileCrud = 'create'
+    // }
   }
-
+  // handleChanges is use to update the state based on value
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
 
-  profileForm = event => {
+  // to make api call for POST
+  onProfileCreate = event => {
     event.preventDefault()
 
     const { profile: {name, occupation, gender, race, interest, hobbies}} = this.state
     const { flash, history, user } = this.props
 
-    profileForm(this.state, user)
+    createProfile(this.state, user)
       .then(handleErrors)
       .then(handleErrors)
       .then(res => res.json())
@@ -39,11 +42,31 @@ class ProfileForm extends Component {
       .catch(() => flash(messages.profileFormFailure, 'flash-error'))
   }
 
+  // to make api call for POST
+  onProfileUpdate = event => {
+    event.preventDefault()
+
+    const { profile: {name, occupation, gender, race, interest, hobbies}} = this.state
+    const { flash, history, user } = this.props
+
+    handleUpdate(this.state, user)
+      .then(handleErrors)
+      .then(handleErrors)
+      .then(res => res.json())
+      .then(() => flash(messages.profileFormSuccess, 'flash-success'))
+      .then(() => history.push('/'))
+      .catch(() => flash(messages.profileFormFailure, 'flash-error'))
+  }
+
+
   render () {
+    {/* this defines what the state is */}
     const { name, occupation, gender, race, interest, hobbies} = this.state
 
-    return (
-      <form className='auth-form' onSubmit={this.profileForm}>
+    let profileView
+
+    if (this.props.editable){
+      profileView = <form className='auth-form' onSubmit={this.props.profileCrud === 'create' ? this.onProfileCreate : this.onProfileUpdate}>
         <h3>Create Profile</h3>
 
         <label htmlFor="name">Name</label>
@@ -102,6 +125,22 @@ class ProfileForm extends Component {
         />
         <button type="submit">Create Profile</button>
       </form>
+    } else {
+      profileView =
+        <div>
+          <h3>{this.props.profile.name}</h3>
+          <p>{this.props.profile.occupation}</p>
+          <p>{this.props.profile.gender}</p>
+          <p>{this.props.profile.race}</p>
+          <p>{this.props.profile.interest}</p>
+          <p>{this.props.profile.hobbies}</p>
+        </div>
+    }
+
+    {/* returns my form */}
+
+    return (
+      <div>{profileView}</div>
     )
   }
 }

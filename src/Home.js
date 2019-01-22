@@ -6,7 +6,7 @@ const Home = (props) => {
   return(
     <div className='text-center'>
       <h1></h1>
-      <Body />
+      <Body user={props.user}/>
     </div>
   )
 }

@@ -23,7 +23,7 @@ class Profile extends Component{
       const race = this.race.value
       const interest = this.interest.value
       const hobbies = this.hobbies.value
-      const id = this.props.fruit.id
+      const id = this.props.profile.id
       const profile = {profile: {id: id, name: name, occupation: occupation,
         gender: gender, race: race, interest: interest, hobbies: hobbies}}
       this.props.handleUpdate(profile)
