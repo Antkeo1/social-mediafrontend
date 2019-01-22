@@ -51,7 +51,7 @@ class ProfileForm extends Component {
 
     handleUpdate(this.state, user)
       .then(handleErrors)
-      .then(handleErrors)
+
       .then(res => res.json())
       .then(() => flash(messages.profileFormSuccess, 'flash-success'))
       .then(() => history.push('/'))

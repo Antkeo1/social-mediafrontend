@@ -18,11 +18,18 @@ class App extends Component {
     this.state = {
       user: null,
       flashMessage: '',
-      flashType: null
+      flashType: null,
+      profiles:[]
     }
   }
 
+
   setUser = user => this.setState({ user })
+  setProfiles = () => {
+    fetch('http://localhost:4741/show-all-profiles')
+      .then((response) => {return response.json()})
+      .then((data) => {this.setState({ profiles: data.profiles}) })
+  }
 
   clearUser = () => this.setState({ user: null })
 
@@ -37,7 +44,10 @@ class App extends Component {
 
   render () {
     const { flashMessage, flashType, user } = this.state
-
+    let homeJsx
+    if (this.state.profiles && this.state.profiles.length > 0) {
+      homeJsx = <Home profiles={this.state.profiles} user={user} />
+    }
     return (
       <React.Fragment>
         <Header user={user} />
@@ -48,7 +58,7 @@ class App extends Component {
             <SignUp flash={this.flash} setUser={this.setUser} />
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn flash={this.flash} setUser={this.setUser} />
+            <SignIn setProfiles= {this.setProfiles} flash={this.flash} setUser={this.setUser} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut flash={this.flash} clearUser={this.clearUser} user={user} />
@@ -59,7 +69,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/create-profile' render={() => (
             <ProfileForm flash={this.flash} user={user} editable={true} profileCrud={'create'}/>
           )} />
-          <Home user={user} />
+          {homeJsx}
         </main>
       </React.Fragment>
     )

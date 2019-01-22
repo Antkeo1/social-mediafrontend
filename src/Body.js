@@ -8,7 +8,7 @@ class Body extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      profiles: []
+      profiles: props.profiles
 
     }
   }
@@ -56,11 +56,11 @@ class Body extends Component {
 
 
 
-  componentDidMount(){
-    fetch('http://localhost:4741/show-all-profiles')
-      .then((response) => {return response.json()})
-      .then((data) => {this.setState({ profiles: data.profiles}) })
-  }
+  // componentDidMount(){
+  //   fetch('http://localhost:4741/show-all-profiles')
+  //     .then((response) => {return response.json()})
+  //     .then((data) => {this.setState({ profiles: data.profiles}) })
+  // }
   render(){
     return(
       <div>
