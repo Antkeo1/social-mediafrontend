@@ -64,6 +64,7 @@ export const changePassword = (passwords, user) => {
     })
   })
 }
+
 export const profileForm = (profile, user) => {
   return fetch(apiUrl + '/create-profile', {
     method: 'POST',
@@ -81,5 +82,58 @@ export const profileForm = (profile, user) => {
         hobbies:profile.hobbies
       }
     })
+  })
+}
+// to View
+export const handleView = (profile, user) => {
+  return fetch('http://localhost:4741/show-profile/:id',
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+    console.log('Profile is viewed!')
+  })
+}
+
+// to delete
+export const handleDelete = (id, user) => {
+  fetch('http://localhost:4741/delete-profile/:id',
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':`Token token=${user.token}`
+      }
+    }).then((response) => {
+    this.deleteProfile(id)
+  })
+}
+// delete method
+export const deleteProfile = (id) => {
+  const newProfiles = this.state.profiles.filter((profile) => profile.id !== id)
+  this.setState({
+    profiles: newProfiles
+  })
+}
+// to edit
+export const handleUpdate = (profile) => {
+  fetch('http://localhost:4741/update-profile/:id',
+    {
+      method: 'PUT',
+      body: JSON.stringify({profile: profile}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+    this.updateProfile(profile)
+  })
+}
+export const updateProfile= (profile) => {
+  const newProfiles = this.state.profiles.filter((p) => p.id !== profile.id)
+  newProfiles.push(profile)
+  this.setState({
+    profiles: newProfiles
   })
 }
