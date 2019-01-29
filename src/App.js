@@ -11,6 +11,8 @@ import ChangePassword from './auth/components/ChangePassword'
 import Home from './Home'
 import ProfileForm from './auth/components/ProfileForm'
 import ProfileCreate from './auth/components/ProfileCreate'
+import ProfileUpdate from './auth/components/ProfileUpdate'
+
 
 
 class App extends Component {
@@ -48,7 +50,7 @@ class App extends Component {
     const { flashMessage, flashType, user } = this.state
     let homeJsx
     if (this.state.profiles && this.state.profiles.length > 0) {
-      homeJsx = <Home profiles={this.state.profiles} user={user} />
+      homeJsx = <Home flash={this.flash} profiles={this.state.profiles} user={user} />
     }
     return (
       <React.Fragment>
@@ -71,6 +73,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/create-profile' render={() => (
             <ProfileCreate flash={this.flash} user={user} editable={true} profileCrud={'create'}/>
           )} />
+
           {homeJsx}
         </main>
       </React.Fragment>

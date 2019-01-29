@@ -14,7 +14,7 @@ const AllProfiles = (props) => {
     }
     return(
       <div key={profile.id}>
-        <ProfileForm profile={profile} user={props.user} editable={editable} deleteable={deleteable} handleView={handleView}
+        <ProfileForm profile={profile} flash={props.flash} user={props.user} editable={editable} deleteable={deleteable} handleView={handleView}
           handleDelete={props.handleDelete} handleUpdate={props.handleUpdate}/>
       </div>
     )

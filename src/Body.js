@@ -64,7 +64,7 @@ class Body extends Component {
   render(){
     return(
       <div>
-        <AllProfiles profiles={this.state.profiles} user={this.props.user} handleUpdate={this.handleUpdate} handleView={handleView}
+        <AllProfiles profiles={this.state.profiles} flash={this.props.flash} user={this.props.user} handleUpdate={this.handleUpdate} handleView={handleView}
           handleDelete={this.handleDelete} />
       </div>
     )

@@ -99,7 +99,7 @@ export const handleView = (profile, user) => {
 
 // to delete
 export const handleDelete = (id, user) => {
-  fetch('http://localhost:4741/delete-profile/:id',
+  return fetch('http://localhost:4741/delete-profile/:id',
     {
       method: 'DELETE',
       headers: {
@@ -117,23 +117,24 @@ export const deleteProfile = (id) => {
     profiles: newProfiles
   })
 }
-// to edit
-export const handleUpdate = (profile) => {
-  fetch('http://localhost:4741/update-profile/:id',
-    {
-      method: 'PUT',
-      body: JSON.stringify({profile: profile}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((response) => {
-    this.updateProfile(profile)
-  })
-}
-export const updateProfile= (profile) => {
-  const newProfiles = this.state.profiles.filter((p) => p.id !== profile.id)
+
+const updateProfile = (profile) => {
+  const newProfiles = this.state.profile.filter((p) => p.id !== profile.id)
   newProfiles.push(profile)
   this.setState({
-    profiles: newProfiles
+    profile: newProfiles
   })
+}
+// to edit
+export const handleUpdate = (profile, user) => {
+  
+  return fetch(`http://localhost:4741/profiles/${profile.id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':`Token token=${user.token}`
+      },
+      body: JSON.stringify({profile: profile}),
+    })
 }
