@@ -7,12 +7,14 @@ import {handleView} from './auth/api'
 const AllProfiles = (props) => {
   const profiles = props.profiles.map((profile) => {
     let editable = false
+    let deleteable = false
     if(props.user && profile.user.id === props.user.id) {
       editable = true
+      deleteable = true
     }
     return(
       <div key={profile.id}>
-        <ProfileForm profile={profile} user={props.user} editable={editable} handleView={handleView}
+        <ProfileForm profile={profile} user={props.user} editable={editable} deleteable={deleteable} handleView={handleView}
           handleDelete={props.handleDelete} handleUpdate={props.handleUpdate}/>
       </div>
     )

@@ -65,7 +65,7 @@ class ProfileForm extends Component {
 
     let profileView
 
-    if (this.props.editable){
+    if (this.props.editable && this.props.deleteable){
       profileView =
       <div>
         <h3>{this.props.profile.name}</h3>

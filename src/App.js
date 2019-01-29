@@ -10,6 +10,8 @@ import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import Home from './Home'
 import ProfileForm from './auth/components/ProfileForm'
+import ProfileCreate from './auth/components/ProfileCreate'
+
 
 class App extends Component {
   constructor () {
@@ -67,7 +69,7 @@ class App extends Component {
             <ChangePassword flash={this.flash} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-profile' render={() => (
-            <ProfileForm flash={this.flash} user={user} editable={true} profileCrud={'create'}/>
+            <ProfileCreate flash={this.flash} user={user} editable={true} profileCrud={'create'}/>
           )} />
           {homeJsx}
         </main>
