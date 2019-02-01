@@ -8,39 +8,32 @@ class ProfileForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      profile: [{
-        name: '',
-        occupation: '',
-        gender: '',
-        race:'',
-        interest:'',
-        hobbies:''
-      }]
-
+      profile: props.profile
     }
-    this.showForm = this.showForm.bind(this)
-
   }
 
-  showForm () {
+  showForm = () => {
     if(this.props.editable === true) {
       return myForm
     }
   }
+
 
   // handleChanges is use to update the state based on value
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
 
+
+
   // to delete
   handleDelete = (id, user) => {
-    return fetch( `https://profile-app1.herokuapp.com/profiles/${profile.id}`,
+    return fetch( `http://localhost:4741/profiles/${this.props.profile.id}`,
       {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization':`Token token=${user.token}`
+          'Authorization':`Token token=${this.props.user.token}`
         }
       })
   }
@@ -109,6 +102,7 @@ class ProfileForm extends Component {
           <button>View</button>
         </div>
     }
+
 
     const myForm =
     <form className='auth-form' onSubmit={this.onProfileUpdate}>

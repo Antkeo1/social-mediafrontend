@@ -9,7 +9,7 @@ export const handleErrors = res => {
 }
 
 export const signUp = credentials => {
-  return fetch(apiUrl + '/sign-up', {
+  return fetch('https://profile-app1.herokuapp.com/sign-up', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export const signUp = credentials => {
 }
 
 export const signIn = credentials => {
-  return fetch('https://profile-app1.herokuapp.com/sign-in', {
+  return fetch('http://localhost:4741/sign-in', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
