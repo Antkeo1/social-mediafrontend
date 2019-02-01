@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:4741'
+const apiUrl = 'https://profile-app1.herokuapp.com/'
 
 export const handleErrors = res => {
   if (res.ok) {
@@ -9,7 +9,7 @@ export const handleErrors = res => {
 }
 
 export const signUp = credentials => {
-  return fetch(apiUrl + '/sign-up', {
+  return fetch('https://profile-app1.herokuapp.com/sign-up', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export const signUp = credentials => {
 }
 
 export const signIn = credentials => {
-  return fetch(apiUrl + '/sign-in', {
+  return fetch('https://profile-app1.herokuapp.com/sign-in', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export const signIn = credentials => {
 }
 
 export const signOut = user => {
-  return fetch(apiUrl + '/sign-out', {
+  return fetch('https://profile-app1.herokuapp.com/sign-out', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const signOut = user => {
 }
 
 export const changePassword = (passwords, user) => {
-  return fetch(apiUrl + '/change-password', {
+  return fetch('https://profile-app1.herokuapp.com/change-password', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export const changePassword = (passwords, user) => {
 }
 
 export const createProfile = (profile, user) => {
-  return fetch(apiUrl + '/create-profile', {
+  return fetch('https://profile-app1.herokuapp.com/create-profile', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export const createProfile = (profile, user) => {
 }
 // to View
 export const handleView = (profile, user) => {
-  return fetch('http://localhost:4741/show-profile/:id',
+  return fetch(`https://profile-app1.herokuapp.com/profiles/${profile.id}`,
     {
       method: 'GET',
       headers: {
@@ -99,7 +99,7 @@ export const handleView = (profile, user) => {
 
 // to delete
 export const handleDelete = (id, user) => {
-  return fetch(`http://localhost:4741/profiles/${profile.id}`,
+  return fetch(`https://profile-app1.herokuapp.com/profiles/${profile.id}`,
     {
       method: 'DELETE',
       headers: {
@@ -119,7 +119,7 @@ const updateProfile = (profile) => {
 // to edit
 export const handleUpdate = (profile, user) => {
 
-  return fetch(`http://localhost:4741/profiles/${profile.id}`,
+  return fetch(`https://profile-app1.herokuapp.com/profiles/${profile.id}`,
     {
       method: 'PATCH',
       headers: {
