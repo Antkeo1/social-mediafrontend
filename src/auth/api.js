@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:4741'
+const apiUrl = 'https://profile-app1.herokuapp.com'
 
 export const handleErrors = res => {
   if (res.ok) {
@@ -86,7 +86,7 @@ export const createProfile = (profile, user) => {
 }
 // to View
 export const handleView = (profile, user) => {
-  return fetch('http://localhost:4741/show-profile/:id',
+  return fetch(`https://profile-app1.herokuapp.com/profiles/${profile.id}`,
     {
       method: 'GET',
       headers: {
@@ -99,27 +99,19 @@ export const handleView = (profile, user) => {
 
 // to delete
 export const handleDelete = (id, user) => {
-  fetch('http://localhost:4741/delete-profile/:id',
+  return fetch( `https://profile-app1.herokuapp.com/profiles/${profile.id}`,
     {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization':`Token token=${user.token}`
       }
-    }).then((response) => {
-    this.deleteProfile(id)
-  })
+    })
 }
-// delete method
-export const deleteProfile = (id) => {
-  const newProfiles = this.state.profiles.filter((profile) => profile.id !== id)
-  this.setState({
-    profiles: newProfiles
-  })
-}
+
 // to edit
 export const handleUpdate = (profile) => {
-  fetch('http://localhost:4741/update-profile/:id',
+  return fetch(`https://profile-app1.herokuapp.com/profiles/${profile.id}`,
     {
       method: 'PUT',
       body: JSON.stringify({profile: profile}),

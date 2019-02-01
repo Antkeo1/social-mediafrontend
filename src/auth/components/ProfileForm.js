@@ -16,15 +16,34 @@ class ProfileForm extends Component {
         interest:'',
         hobbies:''
       }]
+
     }
-    // if (this.props.profileCrud === 'create') {
-    //   this.state.profileCrud = 'create'
-    // }
+    this.showForm = this.showForm.bind(this)
+
   }
+
+  showForm () {
+    if(this.props.editable === true) {
+      return myForm
+    }
+  }
+
   // handleChanges is use to update the state based on value
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
+
+  // to delete
+  handleDelete = (id, user) => {
+    return fetch( `https://profile-app1.herokuapp.com/profiles/${profile.id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Token token=${user.token}`
+        }
+      })
+  }
 
   // to make api call for POST
   onProfileCreate = event => {
@@ -75,8 +94,8 @@ class ProfileForm extends Component {
         <p>{this.props.profile.interest}</p>
         <p>{this.props.profile.hobbies}</p>
         <button>View</button>
-        <button>Delete</button>
-        <button>Edit</button>
+        <button onClick={() => this.handleDelete()}>Delete</button>
+        <button onClick={() => this.showForm()}>Edit</button>
       </div>
     } else {
       profileView =
@@ -91,14 +110,15 @@ class ProfileForm extends Component {
         </div>
     }
 
-    <form className='auth-form' onSubmit={this.props.profileCrud === 'create' ? this.onProfileCreate : this.onProfileUpdate}>
+    const myForm =
+    <form className='auth-form' onSubmit={this.onProfileUpdate}>
       <h3>Create Profile</h3>
 
       <label htmlFor="name">Name</label>
       <input
         required
         name="name"
-        value={name}
+        defaultValue={name}
         type="text"
         placeholder="name"
         onChange={this.handleChange}
@@ -107,7 +127,7 @@ class ProfileForm extends Component {
       <input
         required
         name="occupation"
-        value={occupation}
+        defaultValue={occupation}
         type="text"
         placeholder="Occupation"
         onChange={this.handleChange}
@@ -116,7 +136,7 @@ class ProfileForm extends Component {
       <input
         required
         name="gender"
-        value={gender}
+        defaultValue={gender}
         type="text"
         placeholder="Gender Identity"
         onChange={this.handleChange}
@@ -125,7 +145,7 @@ class ProfileForm extends Component {
       <input
         required
         name="race"
-        value={race}
+        defaultValue={race}
         type="text"
         placeholder="Race"
         onChange={this.handleChange}
@@ -134,7 +154,7 @@ class ProfileForm extends Component {
       <input
         required
         name="interest"
-        value={interest}
+        defaultValue={interest}
         type="text"
         placeholder="What are your interest"
         onChange={this.handleChange}
@@ -143,7 +163,7 @@ class ProfileForm extends Component {
       <input
         required
         name="hobbies"
-        value={hobbies}
+        defaultValue={hobbies}
         type="text"
         placeholder="Hobbies"
         onChange={this.handleChange}
