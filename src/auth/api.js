@@ -25,7 +25,7 @@ export const signUp = credentials => {
 }
 
 export const signIn = credentials => {
-  return fetch(apiUrl + '/sign-in', {
+  return fetch('https://profile-app1.herokuapp.com/sign-in', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
