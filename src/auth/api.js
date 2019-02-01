@@ -99,23 +99,14 @@ export const handleView = (profile, user) => {
 
 // to delete
 export const handleDelete = (id, user) => {
-  return fetch('http://localhost:4741/delete-profile/:id',
+  return fetch(`http://localhost:4741/profiles/${profile.id}`,
     {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization':`Token token=${user.token}`
       }
-    }).then((response) => {
-    this.deleteProfile(id)
-  })
-}
-// delete method
-export const deleteProfile = (id) => {
-  const newProfiles = this.state.profiles.filter((profile) => profile.id !== id)
-  this.setState({
-    profiles: newProfiles
-  })
+    })
 }
 
 const updateProfile = (profile) => {
@@ -127,7 +118,7 @@ const updateProfile = (profile) => {
 }
 // to edit
 export const handleUpdate = (profile, user) => {
-  
+
   return fetch(`http://localhost:4741/profiles/${profile.id}`,
     {
       method: 'PATCH',

@@ -35,29 +35,25 @@ class ProfileForm extends Component {
     // }
   }
 
-  handleEdit(){
-
-  }
-
-  // to delete
-  handleDelete = (id, user) => {
-    fetch('http://localhost:4741/delete-profile/:id',
-      {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':`Token token=${this.props.user.token}`
-        }
-      }).then((response) => {
-      this.deleteProfile(id)
-    })
-  }
   // delete method
   deleteProfile = (id) => {
     const newProfiles = this.state.profile.filter((profile) => profile.id !== id)
     this.setState({
       profile: newProfiles
     })
+  }
+
+  // to delete
+  handleDelete = (id, user) => {
+    fetch(`http://localhost:4741/profiles/${this.state.profile.id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Token token=${this.props.user.token}`
+        }
+      }),
+    console.log('delete success')
   }
 
   // to make api call for Put
@@ -83,7 +79,7 @@ class ProfileForm extends Component {
       .then(() => flash(messages.profileFormSuccess, 'flash-success'))
       .then(() => history.push('/'))
       .catch(() => {
-        
+
         flash(messages.profileFormFailure, 'flash-error')
       })
   }
