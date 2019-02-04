@@ -28,7 +28,7 @@ class ProfileForm extends Component {
 
   // to delete
   handleDelete = (id, user) => {
-    return fetch( `http://localhost:4741/profiles/${this.props.profile.id}`,
+    return fetch( `https://profile-app1.herokuapp.com/profiles/${this.props.profile.id}`,
       {
         method: 'DELETE',
         headers: {
